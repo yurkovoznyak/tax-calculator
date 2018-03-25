@@ -1,1 +1,24 @@
-{}
+{
+  "settings": "Налаштування",
+  "taxSystem": "Система оподаткування",
+  "taxSystemSimplified": "Спрощена",
+  "person": "Особа",
+  "personIndividual": "Фізична",
+  "taxGroup": "Група",
+  "taxGroupFirst": "Перша група",
+  "taxGroupThird": "Третя група",
+  "income": "Дохід",
+  "incomeAmount": "Сума доходу",
+  "calculate": "Обрахувати",
+  "results": "Результат",
+  "calculations": "Обрахунки",
+  "vat": "ПДВ",
+  "vatIncluded": "з ПДВ",
+  "vatExluded": "без ПДВ",
+  "totalTaxes": "Всього податків",
+  "esv": "ЄСВ",
+  "pdfo": "ПДФО",
+  "militaryCollection": "Військовий збір",
+  "singleTax": "Єдиний податок"
+
+}
