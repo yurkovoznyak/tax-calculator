@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
+import { Image, Keyboard } from 'react-native'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import { Images } from '../Themes'
 
@@ -22,16 +24,39 @@ import I18n from '../I18n'
 import Label from '../Components/Label'
 import ListDropdown from '../Components/ListDropdown'
 import ListMoneyInput from '../Components/ListMoneyInput'
+import PropTypes from 'prop-types'
+import * as actions from '../Redux/MainScreenActions'
 
-export default class MainScreen extends Component {
+class MainScreen extends Component {
+
+  static propTypes = {
+    totalIncome: PropTypes.number.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      // incomeAmount:
+      totalIncome: props.totalIncome
     };
 
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.calculateTaxes = this.calculateTaxes.bind(this);
+    this.onIncomeChanged = this.onIncomeChanged.bind(this);
+  }
+
+  onIncomeChanged(newValue) {
+    this.setState({
+      totalIncome: newValue
+    })
+  }
+
+  calculateTaxes() {
+    console.log(this.state.totalIncome)
+    let tax = this.state.totalIncome * 0.1;
+    Keyboard.dismiss()
+    this.props.navigation.navigate('ResultsScreen', {
+      income: this.state.totalIncome,
+      tax: tax
+    })
   }
 
   render () {
@@ -77,10 +102,11 @@ export default class MainScreen extends Component {
         <Label text={I18n.t('income')}/>
         <ListMoneyInput
           placeholder={I18n.t('incomeAmount')}
-          defaultValue={"125"}
+          value={String(this.state.totalIncome)}
+          onChangeValue={this.onIncomeChanged}
         />
 
-        <Button block success style={styles.calculateButton} onPress={() => this.props.navigation.navigate('ResultsScreen')}>
+        <Button block success style={styles.calculateButton} onPress={this.calculateTaxes}>
           <Text>{I18n.t('calculate')}</Text>
         </Button>
       </Content>
@@ -88,3 +114,20 @@ export default class MainScreen extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    totalIncome: state.mainScreen.totalIncome
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainScreen);

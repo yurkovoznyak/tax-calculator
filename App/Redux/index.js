@@ -10,10 +10,12 @@ const persistConfig = {
 };
 
 export const reducers = combineReducers({
-  nav: require('./NavigationRedux').reducer
+  nav: require('./NavigationRedux').reducer,
+  mainScreen: require('./MainScreenRedux').reducer
 })
 
 
 const pReducer = persistReducer(persistConfig, reducers);
-export const store = createStore(pReducer);
+export const store = createStore(pReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 export const persistor = persistStore(store);

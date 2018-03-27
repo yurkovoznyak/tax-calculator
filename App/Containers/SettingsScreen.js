@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
+import { Image, Keyboard } from 'react-native'
 
 import { Images } from '../Themes'
 
@@ -25,6 +25,10 @@ import Label from '../Components/Label'
 import ListDropdown from '../Components/ListDropdown'
 
 export default class SettingsScreen extends Component {
+  componentDidMount() {
+    Keyboard.dismiss()
+  }
+
   render () {
     return (
     <Container style={styles.container}>

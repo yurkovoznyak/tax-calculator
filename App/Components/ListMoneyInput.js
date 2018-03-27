@@ -5,22 +5,16 @@ import styles from './Styles/ListMoneyInput'
 import { Body, Item, ListItem, Picker, Right } from 'native-base'
 import TextInputMask from 'react-native-text-input-mask'
 
-export default class ListDropdown extends Component {
+export default class ListMoneyInput extends Component {
 
   static propTypes = {
     placeholder: PropTypes.string.isRequired,
-    defaultValue: PropTypes.string
-  }
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      text: props.defaultValue || "",
-    }
+    onChangeValue: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired
   }
 
   render () {
-    const {placeholder, defaultValue} = this.props
+    const {placeholder, value, onChangeValue} = this.props
 
     return (
       <ListItem style={styles.settingsDropdownItem}>
@@ -32,9 +26,8 @@ export default class ListDropdown extends Component {
             <TextInputMask
               keyboardType={"numeric"}
               autoCorrect={false}
-              onChangeText={(formatted, extracted) => this.setState({extracted})}
-              defaultValue={defaultValue}
-              value={this.state.text}
+              onChangeText={(formatted) => onChangeValue(Number(formatted))}
+              value={value}
               style={styles.textInputStyles}
               refInput={ref => { this.input = ref }}
               mask={"[99999].[99]"}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
+import { Image, Keyboard } from 'react-native'
 
 import { Images } from '../Themes'
 
@@ -24,6 +24,10 @@ import ResultsItem from '../Components/ResultsItem'
 
 export default class ResultsScreen extends Component {
   render () {
+    const { params } = this.props.navigation.state;
+    const taxes = params.tax || 0;
+    const income = params.income || 0;
+
     return (
     <Container style={styles.container}>
       <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
@@ -43,8 +47,8 @@ export default class ResultsScreen extends Component {
         <Label text={I18n.t('calculations')}/>
         <ResultsConditions taxGroup={I18n.t('taxGroupFirst')} taxSystem={I18n.t('taxSystemSimplified')}/>
 
-        <ResultsItem header={I18n.t('income')} number={564654100.858}/>
-        <ResultsItem header={I18n.t('totalTaxes')} number={564654100.858}/>
+        <ResultsItem header={I18n.t('income')} number={income}/>
+        <ResultsItem header={I18n.t('totalTaxes')} number={taxes}/>
         <ResultsItem header={I18n.t('esv')} number={564654100.858}/>
         <ResultsItem header={I18n.t('pdfo')} number={564654100.858}/>
         <ResultsItem header={I18n.t('militaryCollection')} number={564654100.858}/>
