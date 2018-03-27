@@ -3,10 +3,8 @@ import DebugConfig from '../Config/DebugConfig'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import RootContainer from './RootContainer'
-import createStore from '../Redux'
-
-// create our store
-const store = createStore()
+import {store, persistor} from '../Redux'
+import { PersistGate } from 'redux-persist/lib/integration/react';
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
@@ -21,7 +19,9 @@ class App extends Component {
   render () {
     return (
       <Provider store={store}>
-        <RootContainer />
+        <PersistGate persistor={persistor}>
+          <RootContainer />
+        </PersistGate>
       </Provider>
     )
   }
