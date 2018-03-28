@@ -30,32 +30,54 @@ import * as actions from '../Redux/MainScreenActions'
 class MainScreen extends Component {
 
   static propTypes = {
-    totalIncome: PropTypes.number.isRequired,
-  }
+    settings: PropTypes.object.isRequired,
+  };
 
   constructor(props) {
     super(props);
     this.state = {
-      totalIncome: props.totalIncome
+      settings: props.settings,
+      taxGroup: 'taxGroupFirst'
     };
 
     this.calculateTaxes = this.calculateTaxes.bind(this);
     this.onIncomeChanged = this.onIncomeChanged.bind(this);
+    this.onTaxGroupValueChanged = this.onTaxGroupValueChanged.bind(this);
   }
 
   onIncomeChanged(newValue) {
     this.setState({
-      totalIncome: newValue
+      totalIncome: newValue,
+    })
+  }
+
+  onTaxGroupValueChanged(value) {
+    this.setState({
+      taxGroup: value
     })
   }
 
   calculateTaxes() {
-    console.log(this.state.totalIncome)
-    let tax = this.state.totalIncome * 0.1;
-    Keyboard.dismiss()
+    let singleTax = 0;
+    const sscTax = this.state.settings.minimalSalary * this.state.settings.SSCP / 100;
+
+    switch (this.state.taxGroup) {
+      case 'taxGroupFirst':
+        singleTax = this.state.settings.costOfLiving * this.state.settings.firstGroupSTP / 100;
+        break;
+      case 'taxGroupSecond':
+        singleTax = this.state.settings.minimalSalary * this.state.settings.secondGroupSTP / 100;
+        break;
+    }
+
+    const totalTax = sscTax + singleTax;
+    Keyboard.dismiss();
     this.props.navigation.navigate('ResultsScreen', {
       income: this.state.totalIncome,
-      tax: tax
+      totalTax: totalTax,
+      sscTax: sscTax,
+      singleTax: singleTax,
+      taxGroup: this.state.taxGroup
     })
   }
 
@@ -82,21 +104,24 @@ class MainScreen extends Component {
       <Content padder>
         <Label text={I18n.t('taxSystem')}/>
         <ListDropdown
-          selectedValue={I18n.t('personIndividual')}
+          selectedValue={'personIndividual'}
           dropdownText={I18n.t('person')}
-          dropdownItems={[I18n.t('personIndividual')]}
+          dropdownItems={['personIndividual']}
+          onItemSelect={()=>{}}
         />
 
         <ListDropdown
-          selectedValue={I18n.t('taxSystemSimplified')}
+          selectedValue={'taxSystemSimplified'}
           dropdownText={I18n.t('taxSystem')}
-          dropdownItems={[I18n.t('taxSystemSimplified')]}
+          dropdownItems={['taxSystemSimplified']}
+          onItemSelect={()=>{}}
         />
 
         <ListDropdown
-          selectedValue={I18n.t('taxGroupFirst')}
+          selectedValue={this.state.taxGroup}
           dropdownText={I18n.t('taxGroup')}
-          dropdownItems={[I18n.t('taxGroupFirst'), I18n.t('taxGroupThird')]}
+          dropdownItems={['taxGroupFirst', 'taxGroupSecond', 'taxGroupThird']}
+          onItemSelect={this.onTaxGroupValueChanged}
         />
 
         <Label text={I18n.t('income')}/>
@@ -117,7 +142,7 @@ class MainScreen extends Component {
 
 function mapStateToProps(state) {
   return {
-    totalIncome: state.mainScreen.totalIncome
+    settings: state.mainScreen.settings
   };
 }
 
