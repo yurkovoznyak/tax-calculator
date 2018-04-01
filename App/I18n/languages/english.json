@@ -32,5 +32,9 @@
   "thirdGroupNoVAT": "Third group without VAT",
   "singleSocialContribution": "Single social contribution",
   "sscRate": "SSC rate",
-  "restoreDefault": "Reset settings"
+  "restoreDefault": "Reset settings",
+
+  // help page
+  "help": "Help",
+  "helpContent": "Tax calculator for simplified tax system.\n\n\nCalculations are made based on income for one month and assumes you don't have any workers.\n\n\nAll calculation parameters can be changed in settings page.\nDefault values are for 2018 year.\n\n\nMade by Yuriy Voznyak (SE-43) for Mobile development course in NULP"
 }

@@ -112,7 +112,7 @@ class MainScreen extends Component {
         <Title>Tax calculator</Title>
         </Body>
         <Right>
-          <Button transparent onPress={() => this.props.navigation.goBack()}>
+          <Button transparent onPress={() => this.props.navigation.navigate('HelpScreen')}>
             <Icon name="help" />
           </Button>
         </Right>
