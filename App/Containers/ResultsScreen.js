@@ -29,6 +29,7 @@ export default class ResultsScreen extends Component {
     const totalTax = params.totalTax || 0;
     const sscTax = params.sscTax || 0;
     const singleTax = params.singleTax || 0;
+    const vatEnabled = params.vatIncluded || false;
     const pdfo = params.pdfo || 0;
     const militaryTax = params.militaryTax || 0;
     const vat = params.vat || 0;
@@ -52,14 +53,13 @@ export default class ResultsScreen extends Component {
 
       <Content padder>
         <Label text={I18n.t('calculations')}/>
-        <ResultsConditions taxGroup={I18n.t(taxGroup)} taxSystem={I18n.t(taxSystem)}/>
+        <ResultsConditions taxGroup={I18n.t(taxGroup)} taxSystem={I18n.t(taxSystem)} vatEnabled={vatEnabled}/>
 
         <ResultsItem header={I18n.t('income')} number={income}/>
         <ResultsItem header={I18n.t('totalTaxes')} number={totalTax}/>
         <ResultsItem header={I18n.t('esv')} number={sscTax}/>
         <ResultsItem header={I18n.t('pdfo')} number={pdfo}/>
         <ResultsItem header={I18n.t('militaryCollection')} number={militaryTax}/>
-        <ResultsItem header={I18n.t('vat')} number={vat}/>
         <ResultsItem header={I18n.t('singleTax')} number={singleTax}/>
 
 

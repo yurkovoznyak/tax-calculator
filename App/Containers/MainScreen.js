@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Image, Keyboard } from 'react-native'
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 
 import { Images } from '../Themes'
 
@@ -25,7 +24,6 @@ import Label from '../Components/Label'
 import ListDropdown from '../Components/ListDropdown'
 import ListMoneyInput from '../Components/ListMoneyInput'
 import PropTypes from 'prop-types'
-import * as actions from '../Redux/MainScreenActions'
 
 class MainScreen extends Component {
 
@@ -37,11 +35,14 @@ class MainScreen extends Component {
     super(props);
     this.state = {
       settings: props.settings,
-      taxGroup: 'taxGroupFirst'
+      taxGroup: 'taxGroupFirst',
+      vatIncluded: true,
+      totalIncome: 0
     };
 
     this.calculateTaxes = this.calculateTaxes.bind(this);
     this.onIncomeChanged = this.onIncomeChanged.bind(this);
+    this.onVatDropdownChange = this.onVatDropdownChange.bind(this);
     this.onTaxGroupValueChanged = this.onTaxGroupValueChanged.bind(this);
   }
 
@@ -53,20 +54,35 @@ class MainScreen extends Component {
 
   onTaxGroupValueChanged(value) {
     this.setState({
-      taxGroup: value
+      taxGroup: value,
+    })
+  }
+
+  onVatDropdownChange(value) {
+    let included = value === 'vatIncluded';
+    this.setState({
+      vatIncluded: included,
     })
   }
 
   calculateTaxes() {
     let singleTax = 0;
-    const sscTax = this.state.settings.minimalSalary * this.state.settings.SSCP / 100;
+    const settings = this.state.settings;
+    const sscTax = settings.minimalSalary * settings.SSCP / 100;
 
     switch (this.state.taxGroup) {
       case 'taxGroupFirst':
-        singleTax = this.state.settings.costOfLiving * this.state.settings.firstGroupSTP / 100;
+        singleTax = settings.costOfLiving * settings.firstGroupSTP / 100;
         break;
       case 'taxGroupSecond':
-        singleTax = this.state.settings.minimalSalary * this.state.settings.secondGroupSTP / 100;
+        singleTax = settings.minimalSalary * settings.secondGroupSTP / 100;
+        break;
+      case 'taxGroupThird':
+        if (this.state.vatIncluded) {
+          singleTax = this.state.totalIncome * settings.thirdGroupSTPWithTax / 100;
+        } else {
+          singleTax = this.state.totalIncome * settings.thirdGroupSTPWithoutTax / 100;
+        }
         break;
     }
 
@@ -77,7 +93,8 @@ class MainScreen extends Component {
       totalTax: totalTax,
       sscTax: sscTax,
       singleTax: singleTax,
-      taxGroup: this.state.taxGroup
+      taxGroup: this.state.taxGroup,
+      vatIncluded: this.state.vatIncluded
     })
   }
 
@@ -124,10 +141,19 @@ class MainScreen extends Component {
           onItemSelect={this.onTaxGroupValueChanged}
         />
 
+        {this.state.taxGroup === 'taxGroupThird' &&
+        <ListDropdown
+          selectedValue={this.state.vatIncluded ? 'vatIncluded': 'vatExcluded'}
+          dropdownText={I18n.t('vat')}
+          dropdownItems={['vatIncluded', 'vatExcluded']}
+          onItemSelect={this.onVatDropdownChange}
+        />
+        }
+
         <Label text={I18n.t('income')}/>
         <ListMoneyInput
           placeholder={I18n.t('incomeAmount')}
-          value={String(this.state.totalIncome)}
+          value={String(this.state.totalIncome || "0")}
           onChangeValue={this.onIncomeChanged}
         />
 
@@ -142,17 +168,11 @@ class MainScreen extends Component {
 
 function mapStateToProps(state) {
   return {
-    settings: state.mainScreen.settings
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(actions, dispatch)
+    settings: state.settings
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(MainScreen);

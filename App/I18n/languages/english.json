@@ -14,13 +14,23 @@
   "results": "Results",
   "calculations": "Calculations",
   "vat": "VAT",
-  "vatIncluded": "including VAT",
-  "vatExluded": "excluding VAT",
+  "vatIncluded": "Including VAT",
+  "vatExcluded": "Excluding VAT",
   "totalTaxes": "Total taxes",
   "esv": "ESV",
   "pdfo": "PDFO",
   "militaryCollection": "Military collection",
-  "singleTax": "Single tax"
+  "singleTax": "Single tax",
 
-
+  // settings page
+  "minimalLivingCost": "Minimal cost of living",
+  "pmpo": "PMPO",
+  "salary": "Salary",
+  "minimalSalary": "Minimal salary",
+  "singleTaxRate": "Single tax rate",
+  "thirdGroupVAT": "Third group with VAT",
+  "thirdGroupNoVAT": "Third group without VAT",
+  "singleSocialContribution": "Single social contribution",
+  "sscRate": "SSC rate",
+  "restoreDefault": "Reset settings"
 }

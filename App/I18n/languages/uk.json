@@ -14,12 +14,23 @@
   "results": "Результат",
   "calculations": "Обрахунки",
   "vat": "ПДВ",
-  "vatIncluded": "з ПДВ",
-  "vatExluded": "без ПДВ",
+  "vatIncluded": "З ПДВ",
+  "vatExcluded": "Без ПДВ",
   "totalTaxes": "Всього податків",
   "esv": "ЄСВ",
   "pdfo": "ПДФО",
   "militaryCollection": "Військовий збір",
-  "singleTax": "Єдиний податок"
+  "singleTax": "Єдиний податок",
 
+  // settings page
+  "minimalLivingCost": "Прожитковий мінімум",
+  "pmpo": "ПМПО",
+  "salary": "Зарплатня",
+  "minimalSalary": "Мінімальна зарплатня",
+  "singleTaxRate": "Ставка єдиного податку",
+  "thirdGroupVAT": "Третя група з ПДВ",
+  "thirdGroupNoVAT": "Третя група без ПДВ",
+  "singleSocialContribution": "Єдиний соціальний внесок",
+  "sscRate": "Ставка ЄСВ",
+  "restoreDefault": "Скинути налаштування"
 }

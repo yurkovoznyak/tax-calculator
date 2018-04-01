@@ -1,21 +1,21 @@
 import {combineReducers, createStore} from 'redux'
-import { persistStore, persistReducer } from 'redux-persist'
-import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
-import storage from 'redux-persist/lib/storage';
+import { persistStore, persistReducer, persistCombineReducers, autoMergeLevel1 } from 'redux-persist'
+import { AsyncStorage } from 'react-native'
 
 const persistConfig = {
   key: 'root',
-  storage: storage,
-  stateReconciler: autoMergeLevel2
+  storage: AsyncStorage,
+  stateReconciler: autoMergeLevel1,
+  blacklist: ['nav'],
+  whitelist: ['settings'],
 };
 
-export const reducers = combineReducers({
+export const reducers = persistCombineReducers(persistConfig, {
   nav: require('./NavigationRedux').reducer,
-  mainScreen: require('./MainScreenRedux').reducer
+  settings: require('./SettingsScreen/reducers').reducer
 })
 
 
-const pReducer = persistReducer(persistConfig, reducers);
-export const store = createStore(pReducer,
+export const store = createStore(reducers, undefined,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 export const persistor = persistStore(store);

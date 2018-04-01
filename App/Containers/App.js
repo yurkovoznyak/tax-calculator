@@ -19,7 +19,7 @@ class App extends Component {
   render () {
     return (
       <Provider store={store}>
-        <PersistGate persistor={persistor}>
+        <PersistGate persistor={persistor} loading={null}>
           <RootContainer />
         </PersistGate>
       </Provider>

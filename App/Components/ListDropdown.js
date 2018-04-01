@@ -32,12 +32,12 @@ export default class ListDropdown extends Component {
     return (
       <ListItem style={styles.settingsDropdownItem}>
         <Body>
-        <Text>{dropdownText}</Text>
+        <Text style={styles.placeholder}>{dropdownText}</Text>
         </Body>
         <Right>
           <Picker
             mode="dropdown"
-            style={{width: 150}}
+            style={{width: 165}}
             selectedValue={this.props.selectedValue}
             onValueChange={this.onValueChange.bind(this)}
           >

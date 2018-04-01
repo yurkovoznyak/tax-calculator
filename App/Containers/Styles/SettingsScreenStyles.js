@@ -17,5 +17,8 @@ export default StyleSheet.create({
   },
   title: {
     paddingLeft: 0
+  },
+  resetButton: {
+    marginTop: Metrics.baseMargin,
   }
 })

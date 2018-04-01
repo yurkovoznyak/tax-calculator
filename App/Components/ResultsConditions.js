@@ -28,7 +28,7 @@ export default class ResultsConditions extends Component {
           <View style={styles.itemContainer}>
             <Text style={styles.itemName}>{I18n.t('vat')}</Text>
             <Text style={styles.itemValue}>
-              {I18n.t(vatEnabled ? 'vatIncluded' : 'vatExluded')}
+              {I18n.t(vatEnabled ? 'vatIncluded' : 'vatExcluded')}
             </Text>
           </View>
         </View>

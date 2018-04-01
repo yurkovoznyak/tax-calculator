@@ -19,9 +19,9 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   textInputStyles: {
-    // flex: 1,
+    fontSize: 16
   },
-  currencySign: {
-
+  placeholder: {
+    fontSize: 16
   }
 })

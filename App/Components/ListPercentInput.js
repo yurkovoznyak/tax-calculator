@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, TextInput } from 'react-native'
+import { View, Text } from 'react-native'
 import styles from './Styles/ListMoneyInput'
-import { Body, Item, ListItem, Picker, Right } from 'native-base'
+import { Body, ListItem, Right } from 'native-base'
 import TextInputMask from 'react-native-text-input-mask'
 
-export default class ListMoneyInput extends Component {
+export default class ListPercentInput extends Component {
 
   static propTypes = {
     placeholder: PropTypes.string.isRequired,
@@ -19,7 +19,7 @@ export default class ListMoneyInput extends Component {
     return (
       <ListItem style={styles.settingsDropdownItem}>
         <Body>
-        <Text style={styles.placeholder}>{placeholder}</Text>
+        <Text style={styles.placeholder}>{`${placeholder}, %`}</Text>
         </Body>
         <Right>
           <View style={styles.textInputContainer}>
@@ -30,9 +30,8 @@ export default class ListMoneyInput extends Component {
               value={value}
               style={styles.textInputStyles}
               refInput={ref => { this.input = ref }}
-              mask={"[99999].[99]"}
+              mask={"[999].[99]"}
             />
-            <Text style={styles.currencySign}>₴</Text>
           </View>
         </Right>
       </ListItem>
