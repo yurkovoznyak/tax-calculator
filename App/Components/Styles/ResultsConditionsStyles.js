@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   mainContainer: {
@@ -14,10 +14,13 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   itemName: {
+    flex: 1,
+    flexWrap: 'wrap',
+    textAlign: 'center',
     fontSize: 12,
   },
   itemValue: {
     fontSize: 18,
-    fontWeight: "bold"
-  }
-})
+    fontWeight: 'bold',
+  },
+});

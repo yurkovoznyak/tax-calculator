@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Image, Keyboard } from 'react-native'
-
-import { Images } from '../Themes'
+import React, { Component } from 'react';
+import { Image, Keyboard } from 'react-native';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import {
   Container,
@@ -12,23 +12,21 @@ import {
   Icon,
   Left,
   Right,
-  Body, Text
-} from 'native-base'
+  Body, Text,
+} from 'native-base';
+import { Images } from '../Themes';
 
 // Styles
-import styles from './Styles/SettingsScreenStyles'
-import I18n from '../I18n'
-import Label from '../Components/Label'
-import ListMoneyInput from '../Components/ListMoneyInput'
-import PropTypes from 'prop-types'
-import * as actions from '../Redux/SettingsScreen/actions'
-import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux';
-import ListPercentInput from '../Components/ListPercentInput'
+import styles from './Styles/SettingsScreenStyles';
+import I18n from '../I18n';
+import Label from '../Components/Label';
+import ListMoneyInput from '../Components/ListMoneyInput';
+import * as actions from '../Redux/SettingsScreen/actions';
+import ListPercentInput from '../Components/ListPercentInput';
 
 class SettingsScreen extends Component {
   componentDidMount() {
-    Keyboard.dismiss()
+    Keyboard.dismiss();
   }
 
   static propTypes = {
@@ -38,26 +36,26 @@ class SettingsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      settings: props.settings
+      settings: props.settings,
     };
-    this.prevSettings =  props.settings;
+    this.prevSettings = props.settings;
     this.onBackButtonPress = this.onBackButtonPress.bind(this);
     this.onResetButtonPress = this.onResetButtonPress.bind(this);
   }
 
   onSettingsValueChange(property, newValue) {
-    let settings = this.state.settings
-    settings[property] = newValue
+    const { settings } = this.state;
+    settings[property] = newValue;
     this.setState({
-      settings: settings
-    })
+      settings,
+    });
   }
 
   onBackButtonPress() {
     this.setState({
-      settings: this.prevSettings
-    })
-    this.props.navigation.goBack()
+      settings: this.prevSettings,
+    });
+    this.props.navigation.goBack();
   }
 
   onResetButtonPress() {
@@ -69,14 +67,14 @@ class SettingsScreen extends Component {
       secondGroupSTP: 20,
       thirdGroupSTPWithTax: 3,
       thirdGroupSTPWithoutTax: 5,
-    }
+    };
     this.setState({
-      settings: defaultSettings
-    })
-    this.props.onSettingsSave(defaultSettings)
+      settings: defaultSettings,
+    });
+    this.props.onSettingsSave(defaultSettings);
   }
 
-  render () {
+  render() {
     return (
     <Container style={styles.container}>
       <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
@@ -141,13 +139,13 @@ class SettingsScreen extends Component {
         </Button>
       </Content>
     </Container>
-    )
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    settings: state.settings
+    settings: state.settings,
   };
 }
 

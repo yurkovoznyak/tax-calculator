@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   settingsDropdownItem: {
@@ -11,9 +11,9 @@ export default StyleSheet.create({
     paddingLeft: 10,
     marginBottom: 1,
     marginTop: 1,
-    backgroundColor: "#FFFFFF"
+    backgroundColor: '#FFFFFF',
   },
   placeholder: {
-    fontSize: 16
-  }
-})
+    fontSize: 16,
+  },
+});

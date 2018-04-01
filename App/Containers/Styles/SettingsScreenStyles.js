@@ -1,24 +1,24 @@
-import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles } from '../../Themes/'
+import { StyleSheet } from 'react-native';
+import { Metrics, ApplicationStyles } from '../../Themes/';
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    paddingBottom: Metrics.baseMargin
+    paddingBottom: Metrics.baseMargin,
   },
   logo: {
     marginTop: Metrics.doubleSection,
     height: Metrics.images.logo,
     width: Metrics.images.logo,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
   },
   centered: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
-    paddingLeft: 0
+    paddingLeft: 0,
   },
   resetButton: {
     marginTop: Metrics.baseMargin,
-  }
-})
+  },
+});

@@ -1,19 +1,18 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
-import styles from './Styles/ResultsConditionsStyles'
-import I18n from '../I18n'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { View, Text } from 'react-native';
+import styles from './Styles/ResultsConditionsStyles';
+import I18n from '../I18n';
 
 export default class ResultsConditions extends Component {
-
   static propTypes = {
     taxSystem: PropTypes.string.isRequired,
     taxGroup: PropTypes.string.isRequired,
-    vatEnabled: PropTypes.bool
+    vatEnabled: PropTypes.bool,
   }
 
-  render () {
-    const {taxSystem, taxGroup, vatEnabled} = this.props
+  render() {
+    const { taxSystem, taxGroup, vatEnabled } = this.props;
 
     return (
         <View style={styles.mainContainer}>
@@ -32,6 +31,6 @@ export default class ResultsConditions extends Component {
             </Text>
           </View>
         </View>
-    )
+    );
   }
 }

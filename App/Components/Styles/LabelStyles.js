@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   text: {
@@ -6,5 +6,5 @@ export default StyleSheet.create({
     paddingLeft: 5,
     marginBottom: 10,
     fontSize: 14,
-  }
-})
+  },
+});

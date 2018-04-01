@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
-import { Image, Keyboard } from 'react-native'
-import {connect} from 'react-redux';
-
-import { Images } from '../Themes'
+import React, { Component } from 'react';
+import { Image, Keyboard } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {
   Container,
@@ -14,19 +13,19 @@ import {
   Left,
   Right,
   Body,
-  Text
-} from "native-base";
+  Text,
+} from 'native-base';
+
+import { Images } from '../Themes';
 
 // Styles
-import styles from './Styles/MainScreenStyles'
-import I18n from '../I18n'
-import Label from '../Components/Label'
-import ListDropdown from '../Components/ListDropdown'
-import ListMoneyInput from '../Components/ListMoneyInput'
-import PropTypes from 'prop-types'
+import styles from './Styles/MainScreenStyles';
+import I18n from '../I18n';
+import Label from '../Components/Label';
+import ListDropdown from '../Components/ListDropdown';
+import ListMoneyInput from '../Components/ListMoneyInput';
 
 class MainScreen extends Component {
-
   static propTypes = {
     settings: PropTypes.object.isRequired,
   };
@@ -37,7 +36,7 @@ class MainScreen extends Component {
       settings: props.settings,
       taxGroup: 'taxGroupFirst',
       vatIncluded: true,
-      totalIncome: 0
+      totalIncome: 0,
     };
 
     this.calculateTaxes = this.calculateTaxes.bind(this);
@@ -49,25 +48,25 @@ class MainScreen extends Component {
   onIncomeChanged(newValue) {
     this.setState({
       totalIncome: newValue,
-    })
+    });
   }
 
   onTaxGroupValueChanged(value) {
     this.setState({
       taxGroup: value,
-    })
+    });
   }
 
   onVatDropdownChange(value) {
-    let included = value === 'vatIncluded';
+    const included = value === 'vatIncluded';
     this.setState({
       vatIncluded: included,
-    })
+    });
   }
 
   calculateTaxes() {
     let singleTax = 0;
-    const settings = this.state.settings;
+    const { settings } = this.state;
     const sscTax = settings.minimalSalary * settings.SSCP / 100;
 
     switch (this.state.taxGroup) {
@@ -90,15 +89,15 @@ class MainScreen extends Component {
     Keyboard.dismiss();
     this.props.navigation.navigate('ResultsScreen', {
       income: this.state.totalIncome,
-      totalTax: totalTax,
-      sscTax: sscTax,
-      singleTax: singleTax,
+      totalTax,
+      sscTax,
+      singleTax,
       taxGroup: this.state.taxGroup,
-      vatIncluded: this.state.vatIncluded
-    })
+      vatIncluded: this.state.vatIncluded,
+    });
   }
 
-  render () {
+  render() {
     return (
     <Container style={styles.container}>
       <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
@@ -124,14 +123,14 @@ class MainScreen extends Component {
           selectedValue={'personIndividual'}
           dropdownText={I18n.t('person')}
           dropdownItems={['personIndividual']}
-          onItemSelect={()=>{}}
+          onItemSelect={() => {}}
         />
 
         <ListDropdown
           selectedValue={'taxSystemSimplified'}
           dropdownText={I18n.t('taxSystem')}
           dropdownItems={['taxSystemSimplified']}
-          onItemSelect={()=>{}}
+          onItemSelect={() => {}}
         />
 
         <ListDropdown
@@ -143,7 +142,7 @@ class MainScreen extends Component {
 
         {this.state.taxGroup === 'taxGroupThird' &&
         <ListDropdown
-          selectedValue={this.state.vatIncluded ? 'vatIncluded': 'vatExcluded'}
+          selectedValue={this.state.vatIncluded ? 'vatIncluded' : 'vatExcluded'}
           dropdownText={I18n.t('vat')}
           dropdownItems={['vatIncluded', 'vatExcluded']}
           onItemSelect={this.onVatDropdownChange}
@@ -153,7 +152,7 @@ class MainScreen extends Component {
         <Label text={I18n.t('income')}/>
         <ListMoneyInput
           placeholder={I18n.t('incomeAmount')}
-          value={String(this.state.totalIncome || "0")}
+          value={String(this.state.totalIncome || '0')}
           onChangeValue={this.onIncomeChanged}
         />
 
@@ -162,17 +161,17 @@ class MainScreen extends Component {
         </Button>
       </Content>
     </Container>
-    )
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    settings: state.settings
+    settings: state.settings,
   };
 }
 
 export default connect(
   mapStateToProps,
-  null
+  null,
 )(MainScreen);

@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
-import { Image, Keyboard } from 'react-native'
-
-import { Images } from '../Themes'
+import React, { Component } from 'react';
+import { Image } from 'react-native';
 
 import {
   Container,
@@ -12,18 +10,20 @@ import {
   Icon,
   Left,
   Right,
-  Body
-} from 'native-base'
+  Body,
+} from 'native-base';
+
+import { Images } from '../Themes';
 
 // Styles
-import styles from './Styles/SettingsScreenStyles'
-import I18n from '../I18n'
-import Label from '../Components/Label'
-import ResultsConditions from '../Components/ResultsConditions'
-import ResultsItem from '../Components/ResultsItem'
+import styles from './Styles/SettingsScreenStyles';
+import I18n from '../I18n';
+import Label from '../Components/Label';
+import ResultsConditions from '../Components/ResultsConditions';
+import ResultsItem from '../Components/ResultsItem';
 
 export default class ResultsScreen extends Component {
-  render () {
+  render() {
     const { params } = this.props.navigation.state;
     const income = params.income || 0;
     const totalTax = params.totalTax || 0;
@@ -32,7 +32,6 @@ export default class ResultsScreen extends Component {
     const vatEnabled = params.vatIncluded || false;
     const pdfo = params.pdfo || 0;
     const militaryTax = params.militaryTax || 0;
-    const vat = params.vat || 0;
     const taxSystem = params.taxSystem || 'taxSystemSimplified';
     const taxGroup = params.taxGroup || 'taxGroupFirst';
 
@@ -54,17 +53,14 @@ export default class ResultsScreen extends Component {
       <Content padder>
         <Label text={I18n.t('calculations')}/>
         <ResultsConditions taxGroup={I18n.t(taxGroup)} taxSystem={I18n.t(taxSystem)} vatEnabled={vatEnabled}/>
-
         <ResultsItem header={I18n.t('income')} number={income}/>
         <ResultsItem header={I18n.t('totalTaxes')} number={totalTax}/>
         <ResultsItem header={I18n.t('esv')} number={sscTax}/>
         <ResultsItem header={I18n.t('pdfo')} number={pdfo}/>
         <ResultsItem header={I18n.t('militaryCollection')} number={militaryTax}/>
         <ResultsItem header={I18n.t('singleTax')} number={singleTax}/>
-
-
       </Content>
     </Container>
-    )
+    );
   }
 }

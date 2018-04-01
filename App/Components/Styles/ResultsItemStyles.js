@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   mainContainer: {
@@ -17,6 +17,6 @@ export default StyleSheet.create({
     fontSize: 16,
   },
   itemValue: {
-    fontSize: 25
-  }
-})
+    fontSize: 25,
+  },
+});
